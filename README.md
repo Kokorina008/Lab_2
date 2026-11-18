@@ -1,9 +1,32 @@
+## Отчет по лабораторной работе № 2
+
+#### № группы: `ПМ-2601`
+
+#### Выполнил: `Кокорина Варвара`
+
+#### Вариант: `10`
+
+#### Условие
+Напишите программу на Java, которая выполняет следующие действия
+с двумерным массивом строк:
+1. Считывает с консоли размеры массива N и M, затем элементы
+массива размером N × M.
+2. Сортирует столбцы массива в порядке убывания суммарной длины
+строк в каждом столбце. Если суммы равны, сортирует по суммарному количеству слов в столбце.
+3. Находит и выводит общее количество слов, которые начинаются с
+заглавной буквы во всём массиве, а также выводит сами эти слова.
+4. Выводит элементы массива, разворачивая каждую строку задом
+наперёд. Если строка является палиндромом, помечает её звёздочкой.
+5. Заменяет в каждом элементе массива все пробелы на ’-’, удаляет
+повторяющиеся символы и выводит полученный массив.
+
 ``` Java
 import java.util.Scanner;
 import java.io.PrintStream;
 public class Main {
     public static Scanner in = new Scanner(System.in);
     public static PrintStream out = System.out;
+
     static boolean isProbel(char c) { //является ли символ пробелом?
         return c==' ';
     }
@@ -120,14 +143,14 @@ static String delete(String s) { //Исключение повторяющихс
         int M = in.nextInt();
         in.nextLine();
         String[][] a = new String[N][M];
-        out.println("Введите элементы массива");//Заполнение массива
+        out.println("Введите элементы массива"); //Заполнение массива
         for (int i = 0; i<N; i++) {
             for ( int j = 0; j<M; j++) {
                 a[i][j] = in.nextLine();
             }
         }
         
-        int [] sumLen = new int[M];
+        int [] sumLen = new int[M]; //Подсчет сумм длин строк и слов
         int [] sumWords = new int[M];
         for (int j = 0; j<M; j++) {
             for (int i = 0; i<N; i++) {
@@ -141,7 +164,7 @@ static String delete(String s) { //Исключение повторяющихс
             b[j] = j;
         }
         
-        for (int i = 0; i < M-1; i++) {
+        for (int i = 0; i < M-1; i++) { //Перестановка столбцов
             for (int j = 0; j < M-1-i; j++) {
                 int c1 = b[j];
                 int c2 = b[j+1];
@@ -159,7 +182,7 @@ static String delete(String s) { //Исключение повторяющихс
             }
         }
         
-        String[][] sort = new String[N][M];
+        String[][] sort = new String[N][M]; //Отсортированные столбцы
         for (int i = 0; i<N; i++) {
             for (int j = 0; j<M; j++) {
                 sort[i][j] = a[i][b[j]];
@@ -169,17 +192,14 @@ static String delete(String s) { //Исключение повторяющихс
         out.println("После сортировки столбцов");
         mat(a);
         
-        int k = 0;
+        int k = 0; //Слова с заглавной буквы
         StringBuilder s = new StringBuilder();
         for (int i = 0; i<N; i++) {
             for (int j = 0; j<M; j++) {
                 String [] w = words(a[i][j]);
                 for (int l = 0; l<w.length; l++) {
                     if (start(w[l])==true) {
-                        if (k>0) {
-                            s.append(" ");
-                        }
-                        s.append(w[l]);
+                        s.append(w[l]+" ");
                         k++;
                     }
                 }
@@ -189,12 +209,11 @@ static String delete(String s) { //Исключение повторяющихс
         out.println(k);
         out.println(s);
         
-        out.println("Развернутые строки *");
+        out.println("Развернутые строки, палиндром*"); //Вывод развернутых строк, палиндромы с *
         for (int i = 0; i<N; i++) {
             for (int j = 0; j<M; j++) {
                 String so = a[i][j];
                 String rev = reverse(so);
-                
                 boolean pal = true;
                 for(int z = 0; z<so.length(); z++) {
                     if (so.charAt(z)!=rev.charAt(z)) {
@@ -212,7 +231,7 @@ static String delete(String s) { //Исключение повторяющихс
             out.println();
         }
         
-        out.println("Замена пробелов и удаление повторов");
+        out.println("Замена пробелов и удаление повторов"); //Замена пробелов и удаление  повторов
         String[][] del = new String[N][M];
         for (int i = 0; i<N; i++) {
             for (int j = 0; j<M; j++) {
@@ -222,6 +241,4 @@ static String delete(String s) { //Исключение повторяющихс
         }
         mat(del);
     }
-    
-}
 ```
