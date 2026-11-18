@@ -32,13 +32,6 @@ public class Main {
     }
 
 
-    static String cut(String s, int st, int end) {
-        char[] b = new char[end - st];
-        for (int i = st; i < end; i++) {
-            b[i - st] = s.charAt(i);
-        }
-    return new String(b);
-    }
     static String[] words(String s) { //Разбиение строки на слова, заполнение массива словами 
         int k = countWords(s);
         String[] news = new String[k];
@@ -52,14 +45,14 @@ public class Main {
                 }
             } else {
                 if (start!=-1) {
-                    news[ind] = cut(s,start,i);
+                    news[ind] = s.substring(start,i);
                     ind++;
                     start = -1;
                 }
             }
         }
         if (start!=-1) {
-            news[ind] = cut(s,start, s.length());
+            news[ind] = s.substring(start, s.length());
         }
         return news;
     }
@@ -73,23 +66,29 @@ public class Main {
         return new String(a);
     }
     
-    static String delete(String s) { //Исключение повторяющихся элементов
-        StringBuilder news = new StringBuilder();
-        for (int i = 0; i<s.length(); i++) {
-            char a = s.charAt(i);
-            boolean simb = false;
-            for (int j = 0; j<news.length(); j++) {
-                if (news.charAt(j) == a) {
-                    simb = true;
-                    break;
-                }
+static String delete(String s) { //Исключение повторяющихся элементов
+    char[] news = new char[s.length()];  
+    int count = 0;                        
+    for (int i = 0; i < s.length(); i++) {
+        char a = s.charAt(i);
+        boolean simb = false;             
+        for (int j = 0; j < count; j++) { 
+            if (news[j] == a) {
+                simb = true;
+                break;
             }
-            if (simb == false) {
-                news.append(a);
-            } 
         }
-        return news.toString();
+        if (simb == false) {              
+            news[count] = a;
+            count++;
+        }
     }
+    char[] res = new char[count];
+    for (int i = 0; i < count; i++) {
+        res[i] = news[i];
+    }
+    return new String(res);
+}
     
     static String replace(String s) { //Замена пробелов на -
         char [] news = new char[s.length()];
