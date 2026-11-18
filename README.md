@@ -30,7 +30,15 @@ public class Main {
         }
         return k;
     }
-    
+
+
+    static String cut(String s, int st, int end) {
+        char[] b = new char[end - st];
+        for (int i = st; i < end; i++) {
+            b[i - st] = s.charAt(i);
+        }
+    return new String(b);
+    }
     static String[] words(String s) { //Разбиение строки на слова, заполнение массива словами 
         int k = countWords(s);
         String[] news = new String[k];
@@ -44,14 +52,14 @@ public class Main {
                 }
             } else {
                 if (start!=-1) {
-                    news[ind] = s.substring(start,i);
+                    news[ind] = cut(s,start,i);
                     ind++;
                     start = -1;
                 }
             }
         }
         if (start!=-1) {
-            news[ind] = s.substring(start, s.length());
+            news[ind] = cut(s,start, s.length());
         }
         return news;
     }
@@ -96,7 +104,7 @@ public class Main {
         return new String(news);
     }
     
-    static void mat(String[][] a) {
+    static void mat(String[][] a) { //Вывод матрицы 
         for (int i = 0; i<a.length; i++) {
             for (int j = 0; j<a[i].length;j++) {
                 out.print("[" + a[i][j] + "] ");
@@ -185,12 +193,12 @@ public class Main {
         out.println("Развернутые строки *");
         for (int i = 0; i<N; i++) {
             for (int j = 0; j<M; j++) {
-                String s = a[i][j];
-                String rev = reverse(s);
+                String so = a[i][j];
+                String rev = reverse(so);
                 
                 boolean pal = true;
-                for(int z = 0; z<s.length(); z++) {
-                    if (s.charAt(z)!=rev.charAt(z)) {
+                for(int z = 0; z<so.length(); z++) {
+                    if (so.charAt(z)!=rev.charAt(z)) {
                         pal = false;
                         break;
                     }
@@ -209,8 +217,8 @@ public class Main {
         String[][] del = new String[N][M];
         for (int i = 0; i<N; i++) {
             for (int j = 0; j<M; j++) {
-                String s = replace(a[i][j]);
-                del[i][j] = delete(s);
+                String sa = replace(a[i][j]);
+                del[i][j] = delete(sa);
             }
         }
         mat(del);
