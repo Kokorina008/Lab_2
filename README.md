@@ -1,3 +1,4 @@
+``` Java
 import java.util.Scanner;
 import java.io.PrintStream;
 public class Main {
@@ -216,3 +217,4 @@ public class Main {
     }
     
 }
+```
