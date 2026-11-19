@@ -241,4 +241,5 @@ static String delete(String s) { //Исключение повторяющихс
         }
         mat(del);
     }
+}
 ```
