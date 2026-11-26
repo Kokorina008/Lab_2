@@ -193,21 +193,19 @@ static String delete(String s) { //Исключение повторяющихс
         mat(a);
         
         int k = 0; //Слова с заглавной буквы
-        StringBuilder s = new StringBuilder();
-        for (int i = 0; i<N; i++) {
-            for (int j = 0; j<M; j++) {
-                String [] w = words(a[i][j]);
-                for (int l = 0; l<w.length; l++) {
-                    if (start(w[l])==true) {
-                        s.append(w[l]+" ");
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                String[] w = words(a[i][j]);
+                for (int l = 0; l < w.length; l++) {
+                    if (start(w[l]) == true) {
+                        out.print(w[l] + " ");
                         k++;
                     }
                 }
             }
         }
-        out.println("Слова с заглавной буквы");
-        out.println(k);
-        out.println(s);
+        out.println();
+        out.println("Слова с заглавной буквы: " + k);
         
         out.println("Развернутые строки, палиндром*"); //Вывод развернутых строк, палиндромы с *
         for (int i = 0; i<N; i++) {
