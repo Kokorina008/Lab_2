@@ -191,7 +191,8 @@ static String delete(String s) { //Исключение повторяющихс
         a = sort;
         out.println("После сортировки столбцов");
         mat(a);
-        
+
+        out.println("Слова с заглавной буквы: ");
         int k = 0; //Слова с заглавной буквы
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
@@ -205,7 +206,7 @@ static String delete(String s) { //Исключение повторяющихс
             }
         }
         out.println();
-        out.println("Слова с заглавной буквы: " + k);
+        out.println("Количество слов с заглавной буквы: " + k);
         
         out.println("Развернутые строки, палиндром*"); //Вывод развернутых строк, палиндромы с *
         for (int i = 0; i<N; i++) {
